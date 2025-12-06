@@ -6,7 +6,8 @@ import TestStart from "./TestStart";
 import TestEnd from "./TestEnd";
 import axios from "axios";
 
-const url = "http://localhost:5000";
+// const url = "http://localhost:5000";
+const url = "https://test-backend-sigma-ten.vercel.app";
 
 function App() {
   const [status, setStatus] = useState(localStorage.getItem("status") || "start");
