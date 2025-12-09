@@ -10,6 +10,7 @@ import axios from "axios";
 const url = "https://test-backend-sigma-ten.vercel.app";
 
 function App() {
+  document.title = document.location.hostname.toUpperCase();
   const [status, setStatus] = useState(localStorage.getItem("status") || "start");
   const [data, setData] = useState([]);
 

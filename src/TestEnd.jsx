@@ -27,7 +27,7 @@ const TestEnd = ({ changeStatus }) => {
 
   return (
     <div className="test_end">
-      <h3>Fan: {document.title}</h3>
+      <h3 style={{ textTransform: "capitalize" }}>Fan: {document.location.hostname}</h3>
       <p>
         <b>Savollar soni: </b>
         {JSON.parse(localStorage.getItem("data")).length} ta
