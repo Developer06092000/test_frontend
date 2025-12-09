@@ -1,7 +1,6 @@
 import React from "react";
 
 const TestStart = ({ changeStatus }) => {
-  console.log(document.location.hostname);
   return (
     <div className="test_start">
       <h3 style={{ textTransform: "capitalize" }}>Fan: {document.location.hostname}</h3>
