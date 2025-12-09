@@ -61,23 +61,22 @@ const Test = ({ changeStatus, data }) => {
   const submitHandle = (e) => {
     e.preventDefault();
     let arr = questions;
-    arr[num] = answer !== null ? { id: data[num].id, answer: data[num].answers[answer] } : null;
+    arr[num] = answer !== null ? { id: data[num].id, answer: data[num].answers[answer] } : arr[num];
     localStorage.setItem("questions", JSON.stringify(arr));
-    setQuestions(arr);
-    if (questions.indexOf(null) !== -1) {
-      setAnswer(null);
-    } else {
-      setAnswer(
-        data[num].answers.indexOf(
-          questions[
-            num !== questions.length - 1 ? num + 1 : questions.indexOf(null) !== -1 ? questions.indexOf(null) : 0
-          ].answer
-        )
-      );
-    }
-    let numb = num !== questions.length - 1 ? num + 1 : questions.indexOf(null) !== -1 ? questions.indexOf(null) : 0;
+    let numb =
+      num !== questions.length - 1
+        ? num + 1
+        : questions.findIndex((item) => item.answer.length === 0) !== -1
+        ? questions.findIndex((item) => item.answer.length === 0)
+        : 0;
+    setAnswer(
+      data[numb].answers.indexOf(questions[numb].answer) !== -1
+        ? data[numb].answers.indexOf(questions[numb].answer)
+        : null
+    );
     setNum(numb);
     localStorage.setItem("num", numb);
+    setQuestions(arr);
   };
 
   return (
@@ -128,7 +127,10 @@ const Test = ({ changeStatus, data }) => {
               <div
                 key={idx}
                 className={
-                  "test_number_n" + (questions[idx].answer.length !== 0 || num === idx ? " test_number_n_active" : "")
+                  "test_number_n" +
+                  ((questions[idx].answer && questions[idx].answer.length !== 0) || num === idx
+                    ? " test_number_n_active"
+                    : "")
                 }
                 onClick={() => changeNum(idx)}
               >
